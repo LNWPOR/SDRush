@@ -1,5 +1,6 @@
 import pygame
 from pygame.locals import *
+from MySound import MySound
 
 class StateBase:
 	
@@ -26,6 +27,10 @@ class StateBase:
 
 	def updateState(self):
 		pass
+
+	def playThemeSound(self,themeSound):
+		if not self.themeSound.isPlay():
+			self.themeSound.loop()
 
 	def getID(self):
 		return self.stateID

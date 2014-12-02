@@ -5,7 +5,8 @@ class MySprite():
 
 	def __init__(self,gameDisplay,sp_Path,sp_Total = 0,sp_Width = 0,sp_Height = 0):
 		self.gameDisplay = gameDisplay
-		self.SP = pygame.image.load(sp_Path).convert()
+		self.SP = pygame.image.load(sp_Path)
+		self.SPconvert = self.SP.convert()
 		self.sp_Total = sp_Total
 		self.sp_Width = sp_Width
 		self.sp_Height = sp_Height
@@ -17,7 +18,7 @@ class MySprite():
 
 		self.alpha = 0
 
-	def resetCountAndDelay():
+	def resetCountAndDelay(self):
 		self.cImage = 0
 		self.delay = 0
 		self.pauseDelay = 0
@@ -85,15 +86,15 @@ class MySprite():
 			return False
 
 	def renderImg(self,x,y):
-		self.gameDisplay.blit(self.SP,(x,y))
+		self.gameDisplay.blit(self.SPconvert,(x,y))
 
 	def fadeInImg(self,x,y,fadeSpeed):
 		if self.alpha < 255:
 			self.alpha += fadeSpeed
-		self.SP.set_alpha(self.alpha)
+		self.SPconvert.set_alpha(self.alpha)
 	
 	def fadeOutImg(self,x,y,fadeSpeed):
 		if self.alpha > 0:
 			self.alpha += fadeSpeed
-		self.SP.set_alpha(self.alpha)
+		self.SPconvert.set_alpha(self.alpha)
 	
