@@ -2,8 +2,8 @@ import pygame
 from pygame.locals import *
 from MyClock import MyClock
 from State_Menu import State_Menu
-gameWidth = 1280
-gameHeight = 720
+gameWidth = 1024
+gameHeight = 640
 FPS = 30
 myClockRef = MyClock(FPS)
 gameDisplay = pygame.display.set_mode((gameWidth,gameHeight))
@@ -14,7 +14,6 @@ def main():
 	pygame.init()
 	gameOver = False
 	menuStateRef = State_Menu(gameDisplay,gameWidth,gameHeight,FPS,0)
-	
 	statelst = [menuStateRef]
 	#--------------------------------------------------------------------
 	while not gameOver:

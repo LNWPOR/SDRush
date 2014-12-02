@@ -1,14 +1,11 @@
 import pygame
 from pygame.locals import *
 
-class MySprites():
+class MySprite():
 
-	def __init__(self,gameDisplay,gameWidth,gameHeight,sp_Path,sp_Total = 0,sp_Width = 0,sp_Height = 0):
+	def __init__(self,gameDisplay,sp_Path,sp_Total = 0,sp_Width = 0,sp_Height = 0):
 		self.gameDisplay = gameDisplay
-		self.gameWidth = gameWidth
-		self.gameHeight = gameHeight
-		
-		self.SP = pygame.image.load(sp_Path)
+		self.SP = pygame.image.load(sp_Path).convert()
 		self.sp_Total = sp_Total
 		self.sp_Width = sp_Width
 		self.sp_Height = sp_Height
@@ -18,11 +15,14 @@ class MySprites():
 		self.pauseDelay = 0
 		self.cloop = 0
 
+		self.alpha = 0
+
 	def resetCountAndDelay():
 		self.cImage = 0
 		self.delay = 0
 		self.pauseDelay = 0
 		self.cloop = 0
+		self.alpha = 0
 
 	def play(self,x,y,delay):
 		if self.cImage != self.sp_Total - 1:
@@ -86,3 +86,14 @@ class MySprites():
 
 	def renderImg(self,x,y):
 		self.gameDisplay.blit(self.SP,(x,y))
+
+	def fadeInImg(self,x,y,fadeSpeed):
+		if self.alpha < 255:
+			self.alpha += fadeSpeed
+		self.SP.set_alpha(self.alpha)
+	
+	def fadeOutImg(self,x,y,fadeSpeed):
+		if self.alpha > 0:
+			self.alpha += fadeSpeed
+		self.SP.set_alpha(self.alpha)
+	
