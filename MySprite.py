@@ -86,14 +86,17 @@ class MySprite():
 			return False
 
 	def renderImg(self,x,y):
+		self.gameDisplay.blit(self.SP,(x,y))
+
+	def renderImgConvert(self,x,y):
 		self.gameDisplay.blit(self.SPconvert,(x,y))
 
-	def fadeInImg(self,x,y,fadeSpeed):
+	def setFadeInImg(self,fadeSpeed = 1):
 		if self.alpha < 255:
 			self.alpha += fadeSpeed
 		self.SPconvert.set_alpha(self.alpha)
 	
-	def fadeOutImg(self,x,y,fadeSpeed):
+	def setFadeOutImg(self,fadeSpeed = 1):
 		if self.alpha > 0:
 			self.alpha += fadeSpeed
 		self.SPconvert.set_alpha(self.alpha)

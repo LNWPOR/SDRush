@@ -26,6 +26,7 @@ class State_Menu(StateBase):
 		self.spaceTostartBG = MySprite(gameDisplay,"res/sprites/spaceTostartSP.png",2,580,50)
 	
 	def renderSP(self):
-		self.BG.fadeInImg(0,0,1)
-		self.BG.renderImg(0,0)
-		self.spaceTostartBG.loop(self.gameWidth/2 - 280, self.gameHeight/2 +200,10)
+		self.BG.setFadeInImg(1)
+		self.BG.renderImgConvert(0,0)
+		if self.BG.alpha > 40:
+			self.spaceTostartBG.loop(self.gameWidth/2 - 280, self.gameHeight/2 +200,10)

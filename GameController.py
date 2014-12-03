@@ -2,6 +2,10 @@ import pygame
 from pygame.locals import *
 from MyClock import MyClock
 from State_Menu import State_Menu
+from State_SelectMode import State_SelectMode
+from State_GamePlaySingle  import State_GamePlaySingle
+from State_GamePlayCoop import State_GamePlayCoop
+
 gameWidth = 1024
 gameHeight = 640
 FPS = 30
@@ -14,7 +18,10 @@ def main():
 	pygame.init()
 	gameOver = False
 	menuStateRef = State_Menu(gameDisplay,gameWidth,gameHeight,FPS,0)
-	statelst = [menuStateRef]
+	selectStateRef = State_SelectMode(gameDisplay,gameWidth,gameHeight,FPS,1)
+	singleStateRef = State_GamePlaySingle(gameDisplay,gameWidth,gameHeight,FPS,2)
+	coopStateRef = State_GamePlayCoop(gameDisplay,gameWidth,gameHeight,FPS,3)
+	statelst = [menuStateRef,selectStateRef,singleStateRef,coopStateRef]
 	#--------------------------------------------------------------------
 	while not gameOver:
 		for state in statelst:
