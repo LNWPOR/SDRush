@@ -6,6 +6,6 @@ class Beam2(Beam):
 		Beam.__init__(self,gameDisplay,gameWidth,gameHeight)
 		self.speed = 100
 		self.power = 10
-		self.setUpSP("res/sprites/Beam2.png",3,150,40)
+		self.initSP("res/sprites/Beam2.png",3,150,40)
 
 

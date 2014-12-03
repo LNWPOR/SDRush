@@ -19,7 +19,7 @@ class StateBase:
 	def getCurrentStateID(self):
 		return currentStateID
 
-	def resetState(self):
+	def setUpState(self):
 		pass
 
 	def renderState(self):

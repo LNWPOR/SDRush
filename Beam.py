@@ -24,5 +24,5 @@ class Beam:
 		self.x = 0
 		self.y = -500
 
-	def setUpSP(self,path,num,width,height):
+	def initSP(self,path,num,width,height):
 		self.beamSP = MySprite(self.gameDisplay,path,num,width,height)

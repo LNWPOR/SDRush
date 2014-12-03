@@ -46,3 +46,5 @@ class Player:
 	def moveLeft(self):
 		if self.x > 0:
 			self.x -= self.speed
+
+
