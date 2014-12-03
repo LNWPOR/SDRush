@@ -8,7 +8,7 @@ from State_GamePlayCoop import State_GamePlayCoop
 
 gameWidth = 1024
 gameHeight = 640
-FPS = 30
+FPS = 60
 myClockRef = MyClock(FPS)
 gameDisplay = pygame.display.set_mode((gameWidth,gameHeight))
 pygame.display.set_caption('SDRush')

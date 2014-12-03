@@ -12,7 +12,7 @@ class MyClock:
 	def update(self):
 		self.clock.tick(self.FPS)
 		if self.getTime() - self.currentTime == 1:
-			self.oneSec = self.getTime() - self.currentTime
+			self.oneSec = 1
 		else:
 			self.oneSec = 0
 		self.currentTime = self.getTime()
