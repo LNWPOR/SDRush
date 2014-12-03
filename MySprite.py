@@ -7,6 +7,7 @@ class MySprite():
 		self.gameDisplay = gameDisplay
 		self.SP = pygame.image.load(sp_Path)
 		self.SPconvert = self.SP.convert()
+		self.SPcollider = self.SP.get_rect()
 		self.sp_Total = sp_Total
 		self.sp_Width = sp_Width
 		self.sp_Height = sp_Height
@@ -104,3 +105,6 @@ class MySprite():
 			self.alphaOut -= fadeSpeed
 		self.SPconvert.set_alpha(self.alphaOut)
 	
+	def isCollide(self,other):
+		return pygame.sprite.collide_rect(self.SPcollider,other.SPcollider)
+

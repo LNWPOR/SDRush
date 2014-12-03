@@ -1,18 +1,19 @@
 from State_GamePlay import *
 from MySprite import MySprite
 from MySound import MySound
+from Player_Freedom import  Player_Freedom
 
 class State_GamePlaySingle(State_GamePlay):
 
 
 	def __init__(self,gameDisplay,gameWidth,gameHeight,FPS,stateID):
 		State_GamePlay.__init__(self,gameDisplay, gameWidth, gameHeight,FPS,stateID)
-		
+
+		self.freedomPlayer = Player_Freedom(gameDisplay,gameWidth,gameHeight)
+
 	def renderState(self):
-		self.playThemeSound(self.themeSound)
-		self.renderMap(self.map1Layer2List,self.map1Layer2PosXList,self.map1Layer2PosYList,1)
-		self.renderMap(self.map1Layer1List,self.map1Layer1PosXList,self.map1Layer1PosYList,2)
+		self.renderMap()
+		self.freedomPlayer.render()
 
 	def updateState(self):
-		pass
-
+		self.playThemeSound(self.themeSound)

@@ -19,7 +19,7 @@ class State_GamePlay(StateBase):
 	def initSP(self,gameDisplay):
 		pass
 
-	def renderMap(self,mapLayerList,mapLayerPosXList,mapLayerPosYList,speed):
+	def renderMapLayer(self,mapLayerList,mapLayerPosXList,mapLayerPosYList,speed):
 		mapLayerList[0].renderImg(mapLayerPosXList[0],mapLayerPosYList[0])
 		mapLayerList[1].renderImg(mapLayerPosXList[1],mapLayerPosYList[1])
 		
@@ -27,9 +27,6 @@ class State_GamePlay(StateBase):
 			mapLayerPosXList[i] -= speed
 			if mapLayerPosXList[i] < -2*self.gameWidth:
 				mapLayerPosXList[i] = 2*self.gameWidth-speed
-		
-		self.fadeOutBG.setFadeOutImg(10)
-		self.fadeOutBG.renderImgConvert(0, 0)
 
 	def initMap(self,gameDisplay):
 		self.fadeOutBG = MySprite(gameDisplay,"res/images/fadeOut.png")
@@ -47,3 +44,12 @@ class State_GamePlay(StateBase):
 		self.map1Layer2List = [self.map1Layer2,self.map1Layer2,self.map1Layer2]
 		self.map1Layer2PosXList = [0,2*self.gameWidth]
 		self.map1Layer2PosYList = [0,0]
+
+	def renderMap(self):
+		self.renderMapLayer(self.map1Layer2List,self.map1Layer2PosXList,self.map1Layer2PosYList,1)
+		self.renderMapLayer(self.map1Layer1List,self.map1Layer1PosXList,self.map1Layer1PosYList,2)
+		self.renderFadeIn()
+
+	def renderFadeIn(self):
+		self.fadeOutBG.setFadeOutImg(10)
+		self.fadeOutBG.renderImgConvert(0, 0)
