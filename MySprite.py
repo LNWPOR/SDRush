@@ -16,14 +16,17 @@ class MySprite():
 		self.pauseDelay = 0
 		self.cloop = 0
 
-		self.alpha = 0
+		self.alphaIn = 0
+		self.alphaOut = 255
+		
 
 	def resetCountAndDelay(self):
 		self.cImage = 0
 		self.delay = 0
 		self.pauseDelay = 0
 		self.cloop = 0
-		self.alpha = 0
+		self.alphaIn = 0
+		self.alphaOut = 255
 
 	def play(self,x,y,delay):
 		if self.cImage != self.sp_Total - 1:
@@ -92,12 +95,12 @@ class MySprite():
 		self.gameDisplay.blit(self.SPconvert,(x,y))
 
 	def setFadeInImg(self,fadeSpeed = 1):
-		if self.alpha < 255:
-			self.alpha += fadeSpeed
-		self.SPconvert.set_alpha(self.alpha)
+		if self.alphaIn < 255:
+			self.alphaIn += fadeSpeed
+		self.SPconvert.set_alpha(self.alphaIn)
 	
 	def setFadeOutImg(self,fadeSpeed = 1):
-		if self.alpha > 0:
-			self.alpha += fadeSpeed
-		self.SPconvert.set_alpha(self.alpha)
+		if self.alphaOut > 0:
+			self.alphaOut -= fadeSpeed
+		self.SPconvert.set_alpha(self.alphaOut)
 	

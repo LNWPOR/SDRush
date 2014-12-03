@@ -8,8 +8,8 @@ class State_GamePlaySingle(State_GamePlay):
 	def __init__(self,gameDisplay,gameWidth,gameHeight,FPS,stateID):
 		State_GamePlay.__init__(self,gameDisplay, gameWidth, gameHeight,FPS,stateID)
 		
-
 	def renderState(self):
+		self.playThemeSound(self.themeSound)
 		self.renderMap(self.map1Layer2List,self.map1Layer2PosXList,self.map1Layer2PosYList,1)
 		self.renderMap(self.map1Layer1List,self.map1Layer1PosXList,self.map1Layer1PosYList,2)
 

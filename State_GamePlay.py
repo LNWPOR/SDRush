@@ -8,6 +8,7 @@ class State_GamePlay(StateBase):
 	def __init__(self,gameDisplay,gameWidth,gameHeight,FPS,stateID):
 		StateBase.__init__(self,gameDisplay, gameWidth, gameHeight,FPS,stateID)
 		self.initMap(gameDisplay)
+		self.themeSound = MySound("res/sounds/gamePlayTheme.ogg")
 
 	def renderState(self):
 		pass
@@ -27,8 +28,11 @@ class State_GamePlay(StateBase):
 			if mapLayerPosXList[i] < -2*self.gameWidth:
 				mapLayerPosXList[i] = 2*self.gameWidth-speed
 		
+		self.fadeOutBG.setFadeOutImg(10)
+		self.fadeOutBG.renderImgConvert(0, 0)
 
 	def initMap(self,gameDisplay):
+		self.fadeOutBG = MySprite(gameDisplay,"res/images/fadeOut.png")
 		self.initMap1Layer1(gameDisplay)
 		self.initMap1Layer2(gameDisplay)
 

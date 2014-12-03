@@ -28,5 +28,5 @@ class State_Menu(StateBase):
 	def renderSP(self):
 		self.BG.setFadeInImg(1)
 		self.BG.renderImgConvert(0,0)
-		if self.BG.alpha > 40:
+		if self.BG.alphaIn > 40:
 			self.spaceTostartBG.loop(self.gameWidth/2 - 280, self.gameHeight/2 +200,10)
