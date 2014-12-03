@@ -12,6 +12,7 @@ class State_GamePlaySingle(State_GamePlay):
 	def renderState(self):
 		self.renderMap()
 		self.freedomPlayer.render()
+		pygame.draw.rect(self.gameDisplay,(0,0,0),[400,300,150,20])
 
 	def updateState(self):
 		self.playThemeSound(self.themeSound)

@@ -20,6 +20,9 @@ class Player:
 	def update(self):
 		pass
 
+	def getHP(self):
+		return HP
+
 	def setUpGlobalHP(self):
 		global HP
 		HP = 100
