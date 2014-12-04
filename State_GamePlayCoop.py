@@ -21,6 +21,11 @@ class State_GamePlayCoop(State_GamePlay):
 		self.freedomPlayerRef.update()
 		self.justicePlayerRef.update()
 
+		if self.freedomPlayerRef.flySP.isCollide(self.justicePlayerRef.flySP):
+			pass
+
+
+
 	def setUpState(self,gameDisplay,gameWidth,gameHeight,FPS):
 		self.freedomPlayerRef = Player_Freedom(gameDisplay,gameWidth,gameHeight,FPS)
 		self.justicePlayerRef = Player_Justice(gameDisplay,gameWidth,gameHeight,FPS)
