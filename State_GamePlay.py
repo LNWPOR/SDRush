@@ -5,6 +5,7 @@ from MySound import MySound
 from Enemy1 import Enemy1
 from Enemy2 import Enemy2
 from Enemy3 import Enemy3
+from MyScore import MyScore
 
 class State_GamePlay(StateBase):
 
@@ -12,7 +13,6 @@ class State_GamePlay(StateBase):
 	def __init__(self,gameDisplay,gameWidth,gameHeight,FPS,stateID):
 		StateBase.__init__(self,gameDisplay, gameWidth, gameHeight,FPS,stateID)
 		self.initMap(gameDisplay)
-		self.summonEnemy = False
 		self.themeSound = MySound("res/sounds/gamePlayTheme.ogg")
 		self.enemy1Num = 2
 		self.enemy2Num = 2
@@ -20,6 +20,7 @@ class State_GamePlay(StateBase):
 		self.myClockRef = MyClock(FPS)
 		self.setUpState(gameDisplay,gameWidth,gameHeight,FPS)
 		self.cPlayerDead = 0
+		self.myScoreRef = MyScore()
 
 	def renderState(self):
 		self.renderMap()
@@ -34,6 +35,7 @@ class State_GamePlay(StateBase):
 			self.summonEnemy = True
 			self.updateEnemy()
 			self.checkCollide()
+		self.updateScore()
 		self.checkGameOver(self.gameDisplay, self.gameWidth,self.gameHeight,self.FPS)
 
 	def checkGameOver(self,gameDisplay, gameWidth, gameHeight, FPS):
@@ -44,7 +46,7 @@ class State_GamePlay(StateBase):
 				if cPlayerDead == len(self.playerList):
 					self.setUpState(gameDisplay, gameWidth, gameHeight, FPS)
 					self.themeSound.stop()
-					self.setCurrentStateID(0)
+					self.setCurrentStateID(self.nextStateId)
 	def initSP(self,gameDisplay):
 		pass
 
@@ -132,6 +134,7 @@ class State_GamePlay(StateBase):
 				for enemy in self.enemyList:
 					if beam.beamSP.isCollide(enemy.SP):
 						enemy.HPdamage(beam.power)
+						player.score += enemy.score
 
 	def checkCollide(self):
 		self.checkCollidePlayerAndEnemy()
@@ -152,3 +155,7 @@ class State_GamePlay(StateBase):
 	def setUpState(self,gameDisplay,gameWidth,gameHeight,FPS):
 		self.initPlayer(gameDisplay, gameWidth, gameHeight, FPS)
 		self.initEnemy(gameDisplay,gameWidth,gameHeight,FPS)
+		self.summonEnemy = False
+
+	def updateScore(self):
+		pass

@@ -6,31 +6,35 @@ class Player:
 		self.gameWidth = gameWidth
 		self.gameHeight = gameHeight
 		self.FPS = FPS
-		self.HP = 100
-		self.speed = 10
+		self.HP = 1000
+		self.speed = 20
 		self.power = 10
 		self.slashSound = MySound("res/sounds/slashSound.ogg")
+		self.damageSound = MySound("res/sounds/damage1Sound.ogg")
 		self.initSP()
 		self.myClockRef = MyClock(FPS)
 		self.initBeam(gameDisplay, gameWidth, gameHeight)
 		self.score = 0
 
 	def render(self):
-		self.renderSP()
-		self.renderBeam()
+		if self.HP > 0:
+			self.renderSP()
+			self.renderBeam()
 
 	def update(self):
 		self.myClockRef.update()
-		self.handle_basicMove()
-		self.handle_AtkMove()
-		self.handle_ChangeWeapon()
-		self.updateBeam()
-		self.resetMove()
+		if self.HP > 0:
+			self.handle_basicMove()
+			self.handle_AtkMove()
+			self.handle_ChangeWeapon()
+			self.updateBeam()
+			self.resetMove()
 
 	def getHP(self):
 		return self.HP
 
 	def HPdamage(self,damage):
+		self.damageSound.play()
 		self.HP -= damage
 
 	def moveUp(self):

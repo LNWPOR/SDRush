@@ -1,21 +1,20 @@
+class  MyScore:
+	def __init__(self):
+		pass
 
+	def setScoreFreedom(self,currentScore):
+		global scoreFreedom
+		scoreFreedom = currentScore
 
-class  MyScores:
-	def __init__(self,gameDisplay,gameWidth,gameHeight):
-		self.scaleScore = 100
+	def getScoreFreedom(self):
+		return scoreFreedom
 
-	def setGokuScore(self,countPush):
-		global gokuScore
-		gokuScore = countPush*self.scaleScore
+	def setScoreJustice(self,currentScore):
+		global scoreJustice
+		scoreJustice = currentScore
 
-	def setVegetaScore(self,countPush):
-		global vegetaScore
-		vegetaScore = countPush*self.scaleScore
-
-	def getGokuScore(self):
-		return gokuScore
-
-	def getVegetaScore(self):
-		return vegetaScore
+	def getScoreJustice(self):
+		return scoreJustice
+		
 
 

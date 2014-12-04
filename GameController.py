@@ -5,6 +5,8 @@ from State_Menu import State_Menu
 from State_SelectMode import State_SelectMode
 from State_GamePlaySingle  import State_GamePlaySingle
 from State_GamePlayCoop import State_GamePlayCoop
+from State_GameOverSingle import State_GameOverSingle
+from State_GameOverCoop import State_GameOverCoop
 
 gameWidth = 1024
 gameHeight = 640
@@ -21,7 +23,9 @@ def main():
 	selectStateRef = State_SelectMode(gameDisplay,gameWidth,gameHeight,FPS,1)
 	singleStateRef = State_GamePlaySingle(gameDisplay,gameWidth,gameHeight,FPS,2)
 	coopStateRef = State_GamePlayCoop(gameDisplay,gameWidth,gameHeight,FPS,3)
-	statelst = [menuStateRef,selectStateRef,singleStateRef,coopStateRef]
+	gameOverSingleRef = State_GameOverSingle(gameDisplay,gameWidth,gameHeight,FPS,4)
+	gameOverCoopRef = State_GameOverCoop(gameDisplay,gameWidth,gameHeight,FPS,5)
+	statelst = [menuStateRef,selectStateRef,singleStateRef,coopStateRef,gameOverSingleRef,gameOverCoopRef]
 	#--------------------------------------------------------------------
 	while not gameOver:
 		for state in statelst:
