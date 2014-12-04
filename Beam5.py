@@ -7,3 +7,4 @@ class Beam5(Beam):
 		self.speed = 100
 		self.power = 25
 		self.initSP("res/sprites/Beam5.png",3,75,50)
+		self.initSound("res/sounds/beam5Sound.ogg")

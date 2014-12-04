@@ -1,7 +1,8 @@
-from Player import *
+import pygame
+from pygame.locals import *
+from Player import Player
 from MySprite import MySprite
-from MySound import MySound
-from MyClock import MyClock
+
 from Beam1 import Beam1
 from Beam2 import Beam2
 from Beam3 import Beam3
@@ -10,68 +11,53 @@ from Beam4 import Beam4
 class Player_Freedom(Player):
 	def __init__(self,gameDisplay,gameWidth,gameHeight,FPS):
 		Player.__init__(self,gameDisplay, gameWidth, gameHeight,FPS)
-		self.myClockRef = MyClock(FPS)
-		self.setUpGlobalSP()
 		self.currentMotion = 0
 		self.currentWeapon = 1
 		self.x = 100
 		self.y = 100
-		self.initBeam(gameDisplay, gameWidth, gameHeight)
 
 	def initBeam(self,gameDisplay,gameWidth,gameHeight):
-		self.beam1Ref = Beam1(gameDisplay,gameWidth,gameHeight)
-		self.beam2Ref = Beam2(gameDisplay,gameWidth,gameHeight)
-		self.beam3Ref = Beam3(gameDisplay,gameWidth,gameHeight)
-		self.beam4Ref = Beam4(gameDisplay,gameWidth,gameHeight)
+		beam1Ref = Beam1(gameDisplay,gameWidth,gameHeight)
+		beam2Ref = Beam2(gameDisplay,gameWidth,gameHeight)
+		beam3Ref = Beam3(gameDisplay,gameWidth,gameHeight)
+		beam4Ref = Beam4(gameDisplay,gameWidth,gameHeight)
+		self.beamList = [beam1Ref,beam2Ref,beam3Ref,beam4Ref]
+
 	def renderBeam(self):
-		self.beam1Ref.render()
-		self.beam2Ref.render()
-		self.beam3Ref.render()
-		self.beam4Ref.render()
-
-	def render(self):
-		if self.currentMotion == 0:
-		    self.flySP.loop(self.x,self.y,-1)
-
-		elif self.currentMotion == 1:
-			self.weapon1SP.loop(self.x,self.y,-1)
-		
-		elif self.currentMotion == 2:
-			self.weapon2SP.loop(self.x,self.y,-1)
-
-		elif self.currentMotion == 3:
-			self.weapon3SP.loop(self.x,self.y,-1)
-
-		elif self.currentMotion == 4:
-			self.weapon4SP.loop(self.x,self.y,-1)
-
-		elif self.currentMotion == 5:
-			self.slashSP.loop(self.x,self.y,-1)
-
-		self.renderBeam()
+		for beam in self.beamList:
+			beam.render()
 
 	def updateBeam(self):
-		self.beam1Ref.update()
-		self.beam2Ref.update()
-		self.beam3Ref.update()
-		self.beam4Ref.update()
+		for beam in self.beamList:
+			beam.update()
 
-	def update(self):
-		self.myClockRef.update()
-		self.handle_basicMove()
-		self.handle_AtkMove()
-		self.handle_ChangeWeapon()
+	def renderSP(self):
+		if self.currentMotion == 0:
+		    self.SPList[0].loop(self.x,self.y,-1)
 
-		self.updateBeam()
-		self.resetMove()
+		elif self.currentMotion == 1:
+			self.SPList[1].loop(self.x,self.y,-1)
+		
+		elif self.currentMotion == 2:
+			self.SPList[2].loop(self.x,self.y,-1)
 
-	def setUpGlobalSP(self):
-		self.flySP = MySprite(self.gameDisplay,"res/sprites/freedomFlySP.png",2,225,175)
-		self.slashSP = MySprite(self.gameDisplay,"res/sprites/freedomSlashSP.png",2,225,175)
-		self.weapon1SP = MySprite(self.gameDisplay,"res/sprites/freedomWeapon1SP.png",2,225,175)
-		self.weapon2SP = MySprite(self.gameDisplay,"res/sprites/freedomWeapon2SP.png",2,225,175)
-		self.weapon3SP = MySprite(self.gameDisplay,"res/sprites/freedomWeapon3SP.png",2,225,175)
-		self.weapon4SP = MySprite(self.gameDisplay,"res/sprites/freedomWeapon4SP.png",2,225,175)
+		elif self.currentMotion == 3:
+			self.SPList[3].loop(self.x,self.y,-1)
+
+		elif self.currentMotion == 4:
+			self.SPList[4].loop(self.x,self.y,-1)
+
+		elif self.currentMotion == 5:
+			self.SPList[5].loop(self.x,self.y,-1)
+
+	def initSP(self):
+		flySP = MySprite(self.gameDisplay,"res/sprites/freedomFlySP.png",2,225,175)
+		slashSP = MySprite(self.gameDisplay,"res/sprites/freedomSlashSP.png",2,225,175)
+		weapon1SP = MySprite(self.gameDisplay,"res/sprites/freedomWeapon1SP.png",2,225,175)
+		weapon2SP = MySprite(self.gameDisplay,"res/sprites/freedomWeapon2SP.png",2,225,175)
+		weapon3SP = MySprite(self.gameDisplay,"res/sprites/freedomWeapon3SP.png",2,225,175)
+		weapon4SP = MySprite(self.gameDisplay,"res/sprites/freedomWeapon4SP.png",2,225,175)
+		self.SPList = [flySP,weapon1SP,weapon2SP,weapon3SP,weapon4SP,slashSP]
 
 	def handle_basicMove(self):
 		if pygame.key.get_pressed()[K_w]:
@@ -86,23 +72,24 @@ class Player_Freedom(Player):
 	def handle_AtkMove(self):
 		if pygame.key.get_pressed()[K_j] and self.currentMotion == 0:
 			self.currentMotion = 5
+			self.slashSound.play()
 
 		if pygame.key.get_pressed()[K_h] and self.currentMotion == 0:
 			if self.currentWeapon == 1:
 				self.currentMotion = 1
-				self.beam1Ref.setPos(self.x + 170 ,self.y + 80)
+				self.beamList[0].setPos(self.x + 170 ,self.y + 80)
 
 			elif self.currentWeapon == 2:
 				self.currentMotion = 2
-				self.beam2Ref.setPos(self.x + 170 ,self.y + 90)
+				self.beamList[1].setPos(self.x + 170 ,self.y + 90)
 
 			elif self.currentWeapon == 3:
 				self.currentMotion = 3
-				self.beam3Ref.setPos(self.x + 170 ,self.y + 20)
+				self.beamList[2].setPos(self.x + 170 ,self.y + 20)
 
 			elif self.currentWeapon == 4:
 				self.currentMotion = 4
-				self.beam4Ref.setPos(self.x + 170 ,self.y + 30)
+				self.beamList[3].setPos(self.x + 170 ,self.y + 30)
 
 	def handle_ChangeWeapon(self):
 		if pygame.key.get_pressed()[K_1]:
@@ -114,7 +101,3 @@ class Player_Freedom(Player):
 		if pygame.key.get_pressed()[K_4]:
 			self.currentWeapon = 4	
 
-	def resetMove(self):
-		if self.currentMotion != 0:
-			if self.myClockRef.isSec(1):
-				self.currentMotion = 0

@@ -7,5 +7,6 @@ class Beam2(Beam):
 		self.speed = 100
 		self.power = 10
 		self.initSP("res/sprites/Beam2.png",3,150,40)
-
+		self.initSound("res/sounds/beam2Sound.ogg")
+		self.initEnemySP("res/sprites/enemyBeam2.png",3,150,40)
 

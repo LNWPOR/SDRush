@@ -1,35 +1,37 @@
-import pygame
-from pygame.locals import *
-from MySprite import MySprite
 from MySound import MySound
-
+from MyClock import MyClock
 class Player:
 	def __init__(self,gameDisplay,gameWidth,gameHeight,FPS):
 		self.gameDisplay = gameDisplay
 		self.gameWidth = gameWidth
 		self.gameHeight = gameHeight
 		self.FPS = FPS
-		self.setUpGlobalHP()
-		self.x = 0
-		self.y = 0
+		self.HP = 100
 		self.speed = 10
-		
+		self.power = 10
+		self.slashSound = MySound("res/sounds/slashSound.ogg")
+		self.initSP()
+		self.myClockRef = MyClock(FPS)
+		self.initBeam(gameDisplay, gameWidth, gameHeight)
+		self.score = 0
+
 	def render(self):
-		pass
+		self.renderSP()
+		self.renderBeam()
 
 	def update(self):
-		pass
+		self.myClockRef.update()
+		self.handle_basicMove()
+		self.handle_AtkMove()
+		self.handle_ChangeWeapon()
+		self.updateBeam()
+		self.resetMove()
 
 	def getHP(self):
-		return HP
-
-	def setUpGlobalHP(self):
-		global HP
-		HP = 100
+		return self.HP
 
 	def HPdamage(self,damage):
-		global HP
-		HP -= damage
+		self.HP -= damage
 
 	def moveUp(self):
 		if self.y > 0:
@@ -47,4 +49,31 @@ class Player:
 		if self.x > 0:
 			self.x -= self.speed
 
+	def initSP(self):
+		pass
 
+	def initBeam(self):
+		pass
+
+	def handle_basicMove(self):
+		pass
+
+	def handle_AtkMove(self):
+		pass
+
+	def handle_ChangeWeapon(self):
+		pass
+
+	def updateBeam(self):
+		pass
+
+	def resetMove(self):
+		if self.currentMotion != 0:
+			if self.myClockRef.isSec(1):
+				self.currentMotion = 0
+
+	def renderBeam(self):
+		pass
+
+	def renderSP(self):
+		pass
