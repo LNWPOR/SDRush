@@ -16,5 +16,6 @@ class State_GamePlayCoop(State_GamePlay):
 	def updateScore(self):
 		self.myScoreRef.setScoreFreedom(self.playerList[0].score)
 		self.myScoreRef.setScoreJustice(self.playerList[1].score)
-
+		
+		
 

@@ -13,5 +13,5 @@ class State_GameOverCoop(State_GameOver):
 
 	def renderScore(self):
 		self.myTextWriterRef.draw("FreedomScore: %d"%self.myScoreRef.getScoreFreedom(),50,150,BLUE_COLOR)
-		self.myTextWriterRef.draw("JusticeScore: %d"%self.myScoreRef.getScoreJustice(),50,250,RED_COLOR)
+		self.myTextWriterRef.draw("JusticeScore: %d"%self.myScoreRef.getScoreJustice(),50,220,RED_COLOR)
 

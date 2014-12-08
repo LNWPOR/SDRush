@@ -28,6 +28,9 @@ class Player_Justice(Player):
 	def renderSP(self):
 		if self.currentMotion == 0:
 		    self.SPList[0].loop(self.x,self.y,-1)
+		    for sp in self.SPList:
+		    	if sp != self.SPList[0]:
+		    		sp.setRectPos(-3000,3000)
 
 		elif self.currentMotion == 1:
 			self.SPList[1].loop(self.x,self.y,-1)

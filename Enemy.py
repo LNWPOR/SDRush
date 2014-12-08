@@ -58,7 +58,7 @@ class Enemy:
 	
 	def enemyShoot(self):
 		if self.myClockRef.isSec(self.randomShooTime):
-				self.beam.setPos(self.x-100,self.y + 100)
+			self.beam.setPos(self.x-100,self.y + 100)
 
 
 	def getHP(self):

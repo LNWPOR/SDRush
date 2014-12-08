@@ -7,7 +7,7 @@ class Player:
 		self.gameHeight = gameHeight
 		self.FPS = FPS
 		self.HP = 1000
-		self.speed = 20
+		self.speed = 30
 		self.power = 10
 		self.slashSound = MySound("res/sounds/slashSound.ogg")
 		self.damageSound = MySound("res/sounds/damage1Sound.ogg")
@@ -17,7 +17,6 @@ class Player:
 		self.score = 0
 
 	def render(self):
-		if self.HP > 0:
 			self.renderSP()
 			self.renderBeam()
 
@@ -29,6 +28,9 @@ class Player:
 			self.handle_ChangeWeapon()
 			self.updateBeam()
 			self.resetMove()
+		else:
+			self.x = -3000
+			self.y = -3000
 
 	def getHP(self):
 		return self.HP

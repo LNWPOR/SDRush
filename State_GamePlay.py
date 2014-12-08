@@ -101,7 +101,7 @@ class State_GamePlay(StateBase):
 		for i in range(self.enemy3Num):
 			enemy3Ref = Enemy3(gameDisplay,gameWidth,gameHeight,FPS)
 			self.enemyList.append(enemy3Ref)
-			self.enemyBeamList.append(enemy2Ref.beam)
+			self.enemyBeamList.append(enemy3Ref.beam)
 
 	def renderEnemy(self):
 		for enemy in self.enemyList:
@@ -118,6 +118,8 @@ class State_GamePlay(StateBase):
 					if sp.isCollide(enemy.SP):
 						if player.currentMotion == 5:
 							enemy.HPdamage(player.power)
+							if enemy.HP < 0: 
+								player.score += enemy.score
 						else:
 							player.HPdamage(enemy.power)
 
@@ -127,6 +129,7 @@ class State_GamePlay(StateBase):
 				for beam in self.enemyBeamList:
 					if sp.isCollide(beam.enemyBeamSP):
 						player.HPdamage(beam.power)
+						beam.resetPos()
 
 	def checkCollidePlayerBeamAndEnemy(self):
 		for player in self.playerList:
@@ -134,7 +137,9 @@ class State_GamePlay(StateBase):
 				for enemy in self.enemyList:
 					if beam.beamSP.isCollide(enemy.SP):
 						enemy.HPdamage(beam.power)
-						player.score += enemy.score
+						beam.resetPos()
+						if enemy.HP < 0: 
+							player.score += enemy.score
 
 	def checkCollide(self):
 		self.checkCollidePlayerAndEnemy()
@@ -155,6 +160,7 @@ class State_GamePlay(StateBase):
 	def setUpState(self,gameDisplay,gameWidth,gameHeight,FPS):
 		self.initPlayer(gameDisplay, gameWidth, gameHeight, FPS)
 		self.initEnemy(gameDisplay,gameWidth,gameHeight,FPS)
+		self.fadeOutBG.resetCountAndDelay()
 		self.summonEnemy = False
 
 	def updateScore(self):

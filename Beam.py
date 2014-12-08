@@ -14,14 +14,14 @@ class Beam:
 		self.enemyBeamSP.loop(self.x,self.y,-1)
 
 	def update(self):
-		if self.y > 0:
+		if self.y >= 0:
 			self.x += self.speed
 
 		if self.x > self.gameWidth:
 			self.resetPos()
 
 	def updateEnemyBeam(self):
-		if self.y > 0:
+		if self.y >= 0:
 			self.x -= self.speed
 
 		if self.x < -200:
@@ -34,7 +34,7 @@ class Beam:
 		self.y = y
 
 	def resetPos(self):
-		self.x = 0
+		self.x = -500
 		self.y = -500
 
 	def initSP(self,path,total,width,height):
