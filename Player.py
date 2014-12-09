@@ -31,6 +31,7 @@ class Player:
 		else:
 			self.x = -3000
 			self.y = -3000
+			self.currentMotion = 0
 
 	def getHP(self):
 		return self.HP
