@@ -44,6 +44,9 @@ class Player_Justice(Player):
 		elif self.currentMotion == 5:
 			self.SPList[4].loop(self.x,self.y,-1)
 
+		elif self.currentMotion == 6:
+			self.SPList[5].loop(self.x,self.y,-1)
+
 	def updateBeam(self):
 		for beam in self.beamList:
 			beam.update()
@@ -54,7 +57,8 @@ class Player_Justice(Player):
 		weapon1SP = MySprite(self.gameDisplay,"res/sprites/justiceWeapon1SP.png",2,225,175)
 		weapon2SP = MySprite(self.gameDisplay,"res/sprites/justiceWeapon2SP.png",2,225,175)
 		weapon3SP = MySprite(self.gameDisplay,"res/sprites/justiceWeapon3SP.png",2,225,175)
-		self.SPList = [flySP,weapon1SP,weapon2SP,weapon3SP,slashSP]
+		shieldSP = MySprite(self.gameDisplay,"res/sprites/justiceShield.png",2,225,175)
+		self.SPList = [flySP,weapon1SP,weapon2SP,weapon3SP,slashSP,shieldSP]
 
 	def handle_basicMove(self):
 		if pygame.key.get_pressed()[K_UP]:
@@ -69,6 +73,10 @@ class Player_Justice(Player):
 	def handle_AtkMove(self):
 		if pygame.mouse.get_pressed() == (0,0,1) and self.currentMotion == 0:
 			self.currentMotion = 5
+			self.slashSound.play()
+
+		if pygame.mouse.get_pressed() == (0,1,0) and self.currentMotion == 0:
+			self.currentMotion = 6
 			self.slashSound.play()
 
 		if pygame.mouse.get_pressed() == (1,0,0) and self.currentMotion == 0:

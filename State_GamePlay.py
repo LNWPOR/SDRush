@@ -41,7 +41,7 @@ class State_GamePlay(StateBase):
 	def checkGameOver(self,gameDisplay, gameWidth, gameHeight, FPS):
 		cPlayerDead = 0
 		for player in self.playerList:
-			if player.HP < 0 :
+			if player.HP <= 0 :
 				cPlayerDead += 1
 				if cPlayerDead == len(self.playerList):
 					self.setUpState(gameDisplay, gameWidth, gameHeight, FPS)
@@ -121,14 +121,16 @@ class State_GamePlay(StateBase):
 							if enemy.HP < 0: 
 								player.score += enemy.score
 						else:
-							player.HPdamage(enemy.power)
+							if player.currentMotion != 6:
+								player.HPdamage(enemy.power)
 
 	def checkCollidePlayerAndEnemyBeam(self):
 		for player in self.playerList:
 			for sp in player.SPList:
 				for beam in self.enemyBeamList:
 					if sp.isCollide(beam.enemyBeamSP):
-						player.HPdamage(beam.power)
+						if player.currentMotion != 6:
+							player.HPdamage(beam.power)
 						beam.resetPos()
 
 	def checkCollidePlayerBeamAndEnemy(self):

@@ -53,6 +53,9 @@ class Player_Freedom(Player):
 		elif self.currentMotion == 5:
 			self.SPList[5].loop(self.x,self.y,-1)
 
+		elif self.currentMotion == 6:
+			self.SPList[6].loop(self.x,self.y,-1)
+
 	def initSP(self):
 		flySP = MySprite(self.gameDisplay,"res/sprites/freedomFlySP.png",2,225,175)
 		slashSP = MySprite(self.gameDisplay,"res/sprites/freedomSlashSP.png",2,225,175)
@@ -60,7 +63,8 @@ class Player_Freedom(Player):
 		weapon2SP = MySprite(self.gameDisplay,"res/sprites/freedomWeapon2SP.png",2,225,175)
 		weapon3SP = MySprite(self.gameDisplay,"res/sprites/freedomWeapon3SP.png",2,225,175)
 		weapon4SP = MySprite(self.gameDisplay,"res/sprites/freedomWeapon4SP.png",2,225,175)
-		self.SPList = [flySP,weapon1SP,weapon2SP,weapon3SP,weapon4SP,slashSP]
+		shieldSP = MySprite(self.gameDisplay,"res/sprites/freedomShield.png",2,225,175)
+		self.SPList = [flySP,weapon1SP,weapon2SP,weapon3SP,weapon4SP,slashSP,shieldSP]
 
 	def handle_basicMove(self):
 		if pygame.key.get_pressed()[K_w]:
@@ -73,8 +77,12 @@ class Player_Freedom(Player):
 			self.moveLeft()
 
 	def handle_AtkMove(self):
-		if pygame.key.get_pressed()[K_j] and self.currentMotion == 0:
+		if pygame.key.get_pressed()[K_k] and self.currentMotion == 0:
 			self.currentMotion = 5
+			self.slashSound.play()
+
+		if pygame.key.get_pressed()[K_j] and self.currentMotion == 0:
+			self.currentMotion = 6
 			self.slashSound.play()
 
 		if pygame.key.get_pressed()[K_h] and self.currentMotion == 0:

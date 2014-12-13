@@ -65,7 +65,7 @@ class Enemy:
 		return self.HP
 
 	def HPdamage(self,damage):
-		self.damageSound.play()
+		#self.damageSound.play()
 		self.HP -= damage
 
 	def setPos(self,x,y):

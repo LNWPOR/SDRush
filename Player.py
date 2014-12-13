@@ -26,12 +26,12 @@ class Player:
 			self.handle_basicMove()
 			self.handle_AtkMove()
 			self.handle_ChangeWeapon()
-			self.updateBeam()
 			self.resetMove()
 		else:
 			self.x = -3000
 			self.y = -3000
 			self.currentMotion = 0
+		self.updateBeam()
 
 	def getHP(self):
 		return self.HP
