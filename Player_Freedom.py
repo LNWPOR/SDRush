@@ -2,11 +2,13 @@ import pygame
 from pygame.locals import *
 from Player import Player
 from MySprite import MySprite
+from MySound import MySound
 
 from Beam1 import Beam1
 from Beam2 import Beam2
 from Beam3 import Beam3
 from Beam4 import Beam4
+BLUE_COLOR = (0,0,255)
 
 class Player_Freedom(Player):
 	def __init__(self,gameDisplay,gameWidth,gameHeight,FPS):
@@ -15,6 +17,7 @@ class Player_Freedom(Player):
 		self.currentWeapon = 1
 		self.x = 100
 		self.y = 100
+		self.playerSoundTime = 10
 
 	def initBeam(self,gameDisplay,gameWidth,gameHeight):
 		beam1Ref = Beam1(gameDisplay,gameWidth,gameHeight)
@@ -23,6 +26,10 @@ class Player_Freedom(Player):
 		beam4Ref = Beam4(gameDisplay,gameWidth,gameHeight)
 		self.beamList = [beam1Ref,beam2Ref,beam3Ref,beam4Ref]
 
+	def renderScore(self):
+		self.myTextWriterRef.setFontSize(40)
+		self.myTextWriterRef.draw("P1 Score: %d"%self.score, 40, 25 ,BLUE_COLOR )
+
 	def renderBeam(self):
 		for beam in self.beamList:
 			beam.render()
@@ -30,6 +37,11 @@ class Player_Freedom(Player):
 	def updateBeam(self):
 		for beam in self.beamList:
 			beam.update()
+
+	def renderHP(self):
+		if self.HP > 0:
+				self.myTextWriterRef.setFontSize(40)
+				self.myTextWriterRef.draw("HP: %d"%self.HP, self.x + 30,self.y -30 ,BLUE_COLOR )
 
 	def renderSP(self):
 		if self.currentMotion == 0:
@@ -82,8 +94,8 @@ class Player_Freedom(Player):
 			self.slashSound.play()
 
 		if pygame.key.get_pressed()[K_j] and self.currentMotion == 0:
-			self.currentMotion = 6
-			self.slashSound.play()
+				self.currentMotion = 6
+				self.slashSound.play()
 
 		if pygame.key.get_pressed()[K_h] and self.currentMotion == 0:
 			if self.currentWeapon == 1:

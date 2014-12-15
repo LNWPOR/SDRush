@@ -1,12 +1,15 @@
 from MySound import MySound
 from MyClock import MyClock
+from MyTextWriter import MyTextWriter
+from random import *
+
 class Player:
 	def __init__(self,gameDisplay,gameWidth,gameHeight,FPS):
 		self.gameDisplay = gameDisplay
 		self.gameWidth = gameWidth
 		self.gameHeight = gameHeight
 		self.FPS = FPS
-		self.HP = 1000
+		self.HP = 3000
 		self.speed = 30
 		self.power = 10
 		self.slashSound = MySound("res/sounds/slashSound.ogg")
@@ -15,10 +18,16 @@ class Player:
 		self.myClockRef = MyClock(FPS)
 		self.initBeam(gameDisplay, gameWidth, gameHeight)
 		self.score = 0
+		self.myTextWriterRef = MyTextWriter(gameDisplay,gameWidth,gameHeight)
 
 	def render(self):
 			self.renderSP()
 			self.renderBeam()
+			self.renderHP()
+			self.renderScore()
+
+	def renderHP(self):
+		pass
 
 	def update(self):
 		self.myClockRef.update()
@@ -83,4 +92,7 @@ class Player:
 		pass
 
 	def renderSP(self):
+		pass
+
+	def renderScore(self):
 		pass

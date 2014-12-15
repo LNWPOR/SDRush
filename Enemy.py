@@ -15,13 +15,14 @@ class Enemy:
 		self.x = self.gameWidth
 		self.y = self.gameHeight/2
 		self.isAlive = False
-		self.randomRebornTime = randint(1,10)
-		self.randomShooTime = randint(1,2)
+		self.randomRebornTime = randint(4,10)
+		self.randomShootTime = randint(3,6)
 		self.power = 10
 		self.randomBoundaryTop = self.gameHeight/2 - randint(100,300)
 		self.randomBoundaryBot = self.gameHeight/2 + randint(100,300)
 		self.moveUP = True
 		self.moveDown = True
+		self.isBoss = False
  
 	def render(self):
 		self.SP.loop(self.x,self.y,-1)
@@ -57,7 +58,7 @@ class Enemy:
 						self.moveUP = True
 	
 	def enemyShoot(self):
-		if self.myClockRef.isSec(self.randomShooTime):
+		if self.myClockRef.isSec(self.randomShootTime):
 			self.beam.setPos(self.x-100,self.y + 100)
 
 
@@ -75,6 +76,7 @@ class Enemy:
 
 	def resetPos(self):
 		self.boomSound.play()
+		self.speed += 0.5
 		self.x = self.gameWidth
 		self.y = -500 
 		self.HP = self.maxHP

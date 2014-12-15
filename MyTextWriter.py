@@ -17,7 +17,9 @@ class MyTextWriter:
 
 	def setFontType(self,fontType):
 		self.fontType = fontType
+		self.font = pygame.font.SysFont(self.fontType,self.fontSize)
 
 	def setFontSize(self,fontSize):
 		self.fontSize = fontSize
+		self.font = pygame.font.SysFont(self.fontType,self.fontSize)
 

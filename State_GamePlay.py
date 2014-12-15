@@ -5,7 +5,11 @@ from MySound import MySound
 from Enemy1 import Enemy1
 from Enemy2 import Enemy2
 from Enemy3 import Enemy3
+from EnemyBoss1 import EnemyBoss1
+from EnemyBoss2 import EnemyBoss2
+from EnemyBoss3 import EnemyBoss3
 from MyScore import MyScore
+from MyTextWriter import MyTextWriter
 
 class State_GamePlay(StateBase):
 
@@ -13,14 +17,16 @@ class State_GamePlay(StateBase):
 	def __init__(self,gameDisplay,gameWidth,gameHeight,FPS,stateID):
 		StateBase.__init__(self,gameDisplay, gameWidth, gameHeight,FPS,stateID)
 		self.initMap(gameDisplay)
-		self.themeSound = MySound("res/sounds/gamePlayTheme.ogg")
+		self.themeSound = MySound("res/sounds/gamePlayTheme2.ogg")
 		self.enemy1Num = 2
-		self.enemy2Num = 2
-		self.enemy3Num = 2
+		self.enemy2Num = 1
+		self.enemy3Num = 1
 		self.myClockRef = MyClock(FPS)
 		self.setUpState(gameDisplay,gameWidth,gameHeight,FPS)
 		self.cPlayerDead = 0
 		self.myScoreRef = MyScore()
+		self.myTextWriterRef = MyTextWriter(gameDisplay, gameWidth, gameHeight)
+		self.scoreSummonBoss = 2000
 
 	def renderState(self):
 		self.renderMap()
@@ -35,8 +41,17 @@ class State_GamePlay(StateBase):
 			self.summonEnemy = True
 			self.updateEnemy()
 			self.checkCollide()
+
+		for player in self.playerList:
+			if player.score > self.scoreSummonBoss:
+				self.summonBoss()
+
+
 		self.updateScore()
 		self.checkGameOver(self.gameDisplay, self.gameWidth,self.gameHeight,self.FPS)
+	def summonBoss(self):
+		for enemy in self.enemyList:
+			enemy.isBoss = False
 
 	def checkGameOver(self,gameDisplay, gameWidth, gameHeight, FPS):
 		cPlayerDead = 0
@@ -47,6 +62,7 @@ class State_GamePlay(StateBase):
 					self.setUpState(gameDisplay, gameWidth, gameHeight, FPS)
 					self.themeSound.stop()
 					self.setCurrentStateID(self.nextStateId)
+
 	def initSP(self,gameDisplay):
 		pass
 
@@ -103,13 +119,26 @@ class State_GamePlay(StateBase):
 			self.enemyList.append(enemy3Ref)
 			self.enemyBeamList.append(enemy3Ref.beam)
 
+		enemyBoss1Ref = EnemyBoss1(gameDisplay,gameWidth,gameHeight,FPS)
+		self.enemyList.append(enemyBoss1Ref)
+		self.enemyBeamList.append(enemyBoss1Ref.beam)
+
+		enemyBoss2Ref = EnemyBoss2(gameDisplay,gameWidth,gameHeight,FPS)
+		self.enemyList.append(enemyBoss2Ref)
+		self.enemyBeamList.append(enemyBoss2Ref.beam)
+
+		enemyBoss3Ref = EnemyBoss3(gameDisplay,gameWidth,gameHeight,FPS)
+		self.enemyList.append(enemyBoss3Ref)
+		self.enemyBeamList.append(enemyBoss3Ref.beam)
+
 	def renderEnemy(self):
 		for enemy in self.enemyList:
-			enemy.render()
+				enemy.render()
 
 	def updateEnemy(self):
 		for enemy in self.enemyList:
-			enemy.update()
+			if not enemy.isBoss:
+				enemy.update()
 
 	def checkCollidePlayerAndEnemy(self):
 		for player in self.playerList:

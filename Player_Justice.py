@@ -2,10 +2,12 @@ import pygame
 from pygame.locals import *
 from Player import Player
 from MySprite import MySprite
+from MySound import MySound
 
 from Beam1 import Beam1
 from Beam2 import Beam2
 from Beam5 import Beam5
+RED_COLOR = (240,0,0)
 
 class Player_Justice(Player):
 	def __init__(self,gameDisplay,gameWidth,gameHeight,FPS):
@@ -14,6 +16,7 @@ class Player_Justice(Player):
 		self.currentWeapon = 1
 		self.x = 100
 		self.y = 400
+		self.playerSoundTime = 7
 
 	def initBeam(self,gameDisplay,gameWidth,gameHeight):
 		beam1Ref = Beam1(gameDisplay,gameWidth,gameHeight)
@@ -21,9 +24,18 @@ class Player_Justice(Player):
 		beam5Ref = Beam5(gameDisplay,gameWidth,gameHeight)
 		self.beamList = [beam1Ref,beam2Ref,beam5Ref]
 
+	def renderScore(self):
+		self.myTextWriterRef.setFontSize(40)
+		self.myTextWriterRef.draw("P2 Score: %d"%self.score, self.gameWidth/2 - 50, 25 ,RED_COLOR )
+
 	def renderBeam(self):
 		for beam in self.beamList:
 			beam.render()
+
+	def renderHP(self):
+		if self.HP > 0:
+				self.myTextWriterRef.setFontSize(40)
+				self.myTextWriterRef.draw("HP: %d"%self.HP, self.x + 50,self.y -30 ,RED_COLOR )
 
 	def renderSP(self):
 		if self.currentMotion == 0:
